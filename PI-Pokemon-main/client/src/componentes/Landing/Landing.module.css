@@ -1,0 +1,37 @@
+.botton {
+    font-size: 25px;
+    background-color: #3466a9ba;
+    color: white;
+    font-weight: bold;
+    padding: 15px 35px;
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: #d6e5e5e6;
+    margin-top: 60px;
+    cursor: pointer;
+}
+.botton:hover {
+    background-color: #316ab6cc;
+    color: rgb(190, 179, 179);
+
+}
+
+.title {
+    background-color: #0000006b;
+    color: #fff;
+    padding: 5px 10px 10px 10px;
+    width: 70%;
+    border-radius: 13px;
+    box-shadow: 6px 6px 5px 0px rgb(110 155 188 / 63%);
+    margin-top: 60px;
+    text-align: center;
+}
+
+.contains  {
+    display: flex;
+    justify-content: center;
+}
+
+/* .link {
+    text-decoration: none;
+} */

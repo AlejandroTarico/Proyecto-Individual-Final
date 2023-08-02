@@ -5,6 +5,10 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(https://www.nacionflix.com/__export/1603477004512/sites/debate/img/2020/10/23/descubre_que_pokxmon_eres_de_acuerdo_con_tu_personalidad.jpg_173086759.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 code {

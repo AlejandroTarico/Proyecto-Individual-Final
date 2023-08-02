@@ -1,0 +1,21 @@
+.searchStyle {
+    margin-left: 100px;
+}
+
+.inputSearch {
+    padding: 6px;
+    border-radius: 10px;
+    border: none;
+    margin-right: 10px;
+}
+
+.buttonSearch {
+    font-weight: 600;
+    font-size: 16px;
+    padding: 7px 10px;
+    background-color: #a6dd94;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}

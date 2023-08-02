@@ -1,0 +1,25 @@
+.containerCard {
+    border: solid 5px;
+    border-color: rgba(19, 64, 85, 0.89);
+    border-radius: 15px;
+    background-color: rgb(215, 219, 160);
+    box-shadow: 7px 8px 6px 3px rgba(217, 219, 98, 0.719);
+    margin-top: 85px;
+    display: inline-block;
+    text-align: center;
+    padding: 15px;
+    width: 50%;
+}
+
+.textoDesing {
+    display: flex;
+    justify-content: space-around;
+    color: rgb(76 142 175);
+}
+
+.cardFLex {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding-top: 75px;
+}
