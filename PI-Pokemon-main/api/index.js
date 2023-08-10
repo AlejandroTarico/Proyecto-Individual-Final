@@ -19,9 +19,13 @@
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
 const { conn } = require('./src/db.js');
+const PokemonTypeDbOfApi = require('./src/dataLoader.js');
+
+
 
 // Syncing all the models at once.
 conn.sync({ force: false, alter: true }).then(() => {
+  //PokemonTypeDbOfApi(); // De este modo estoy realizando un una llamada a la funcion que se encargara de almacenar los datos (types) obtenidos de la api, en mi base de datos
   server.listen(3001, () => {
     console.log('%s listening at 3001'); // eslint-disable-line no-console
   });

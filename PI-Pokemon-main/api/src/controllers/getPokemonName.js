@@ -24,7 +24,7 @@ const getPokemonName = async (req, res) => {
         console.log("esto es lo que trae DATA DESMENUSADO +++++++");
 
         const allPokemonesDB = await Pokemon.findAll({
-            where: { name: { [Op.iLike]: `%${name}%`},
+            where: { nombre: { [Op.iLike]: `%${nombre}%`},
             },
         });
        const detailPokemon = {...allPokemonesApi, ...allPokemonesDB}

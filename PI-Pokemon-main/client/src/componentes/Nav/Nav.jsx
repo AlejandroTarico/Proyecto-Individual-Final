@@ -10,7 +10,7 @@ const Nav = () => {
                 <nav> 
                     <NavLink to='/home' >Home</NavLink>
                     <NavLink to='/about' >About</NavLink>
-                    <NavLink to='/favorites' >Favorites</NavLink>
+                    <NavLink to='/formulario' >Formulario</NavLink>
                 </nav>
                 <SearchBar></SearchBar>
             </div>

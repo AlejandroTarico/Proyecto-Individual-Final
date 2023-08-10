@@ -42,7 +42,7 @@ const PokeCards = (props) => {
     useEffect (() => {  // Uso useEffect para controlar cuándo se realiza la solicitud al backend. Esto asegura que la petición solo se realice cuando sea necesario.
         const fetchdata = async () => { // Con async, función asincronica puedo hacer que el código sea más legible y fácil de mantener.
         try {  // Con try puedo manejar mejor los errores que pudieran ocurrir con a solicitud
-            const {data} = await axios("http://localhost:3001/pokemons");
+            const {data} = await axios("http://localhost:3001/pokemonsapi/pokemons");
             setCharacters(data);
             
         } catch (error) {

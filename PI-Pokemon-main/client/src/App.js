@@ -4,6 +4,7 @@ import Landing from './componentes/Landing/Landing';
 import Nav from './componentes/Nav/Nav';
 import PokeCards from './componentes/PokeCards/PokeCards';
 import Detail from './componentes/Detail/Detail';
+import Form from './componentes/Form/Form';
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/" element={<Landing onSearch />}/>
         <Route path="/home" element={<PokeCards  />}/>
         <Route path="/detail/:id" element={<Detail />} />
+        <Route path="/formulario" element={<Form />} />
       </Routes>
       
     </div>

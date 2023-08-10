@@ -1,0 +1,102 @@
+.container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+
+.formulario {
+    display: table-caption;
+    margin: 100px 25px 0px 30px;
+    background-color: #1c1e208f;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    width: 90%;
+}
+
+.cardFLex {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+    gap: 30px;
+    padding: 25px;
+
+}
+
+.title {
+    width: 80%;
+    display: inline-flex;
+}
+.text {
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 10px;
+}
+.flexText {
+    display: flex;
+    justify-content: space-between;
+}
+
+.inputText {
+    border-radius: 10px 0px;
+    padding: 8px 5px;
+    border: solid 5px #f3b810d9;
+    color: #494e4e;
+    font-size: 15px;
+    width: 60%;
+    font-weight: 650;
+}
+
+input:focus {
+    outline-color: azure;
+}
+
+select:focus {
+    outline-color: azure;
+}
+
+select[type="selected"]{
+    width: 66%;
+}
+
+.buttomForm {
+    padding: 0.6rem 1rem;
+    border: 1px solid #995309;
+    border-radius: 4px;
+    background-color: #d9750b;
+    color: #fff;
+    font-size: 1.5rem;
+    text-shadow: 0 -1px 0 rgba(0,0,0,.5);
+    box-shadow: 0 1px 0 rgba(255,255,255,.5) inset, 0 1px 3px rgba(0,0,0,.2);
+    background-image: linear-gradient(#f90 10%,#e76a00 100%);
+}
+
+.buttomForm:hover{
+    background-color: #e0811b;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(10%,#f0a100),to(#f70));
+    background-image: linear-gradient(#f0a100 10%,#f70 100%);
+    cursor: pointer;
+}
+
+
+.customFileInput {
+    display: inline-block;
+    padding: 8px 20px;
+    font-size: 14px;
+    font-weight: 650;
+    background-color: #ff8d00;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 53%;
+  }
+  
+  /* Ocultar el input de tipo archivo */
+  .customFileInput input[type="file"] {
+    display: none;
+  }
+
+  .img {
+    width: 25%;
+  }
