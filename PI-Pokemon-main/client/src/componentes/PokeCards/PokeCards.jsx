@@ -1,25 +1,37 @@
 import { useState, useEffect } from "react";
 import Card from "../Card/Card";
+import { connect } from "react-redux";
+import { fetchPokemons } from "../../redux/actions"; 
 import style from "./PokeCards.module.css";
-import axios from "axios";
 import Pagination from '../Utils/Pagination/Paginacion'; // Importa el componente Pagination.
 
 
 
-const PokeCards = (props) => {
-    const [pokechars, setCharacters] = useState([]);
+const PokeCards = ({ pokemons, fetchPokemons }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12; // Número de elementos por página.
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            await fetchPokemons(); // Llamo al actions para obtener los pokémons.
+          } catch (error) {
+            console.error('Error al obtener los pokémons:', error);
+          }
+        };
+      
+        fetchData();
+      }, [fetchPokemons]);
     
     
     // Función para obtener los elementos correspondientes a la página actual.
     const getCurrentItems = () => {
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        return pokechars.slice(indexOfFirstItem, indexOfLastItem);
+        return pokemons.slice(indexOfFirstItem, indexOfLastItem);
     };
     
-    const totalPages = Math.ceil(pokechars.length / itemsPerPage);
+    const totalPages = Math.ceil(pokemons.length / itemsPerPage);
 
 
     // Función para cambiar a la siguiente página.
@@ -29,31 +41,12 @@ const PokeCards = (props) => {
         }
     };
 
-
     // Función para cambiar a la página anterior.
     const prevPage = () => {
         if (currentPage > 1) {
           setCurrentPage((prevPage) => prevPage - 1);
         }
     };
-
-
-    //......... SECCION DONDE SOLICITO TODOS LOS POKEMONS ................//
-    useEffect (() => {  // Uso useEffect para controlar cuándo se realiza la solicitud al backend. Esto asegura que la petición solo se realice cuando sea necesario.
-        const fetchdata = async () => { // Con async, función asincronica puedo hacer que el código sea más legible y fácil de mantener.
-        try {  // Con try puedo manejar mejor los errores que pudieran ocurrir con a solicitud
-            const {data} = await axios("http://localhost:3001/pokemonsapi/pokemons");
-            setCharacters(data);
-            
-        } catch (error) {
-            Error('No se pudo obtener la informacion: ', error);
-    
-        }
-        } 
-        fetchdata();
-    }, []);
- //........... FIN DE LA SECCIÓN DE LA PETICIÓN DE POKEMONS ..............//
-
  
     return (
         <>
@@ -77,4 +70,14 @@ const PokeCards = (props) => {
     )
 
 }    
-export default PokeCards;
+const mapStateToProps = (state) => {
+    return {
+      pokemons: state.pokemons // Mapea el estado de los pokémons desde el store al componente.
+    };
+  };
+  
+  const mapDispatchToProps = {
+    fetchPokemons // Mapea la acción para obtener los pokémons al componente.
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(PokeCards);

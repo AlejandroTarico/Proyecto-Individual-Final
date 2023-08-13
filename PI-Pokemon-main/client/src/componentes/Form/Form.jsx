@@ -2,11 +2,17 @@ import { useEffect, useState } from 'react';
 import style from './Form.module.css'
 import axios from 'axios';
 import validate from './validation'
+import { connect } from "react-redux";
+import { typesPokemons } from "../../redux/actions"; 
+import Previsualization from './Previsulization';
 
 
-const Form = () => {
+const Form = ({types, typesPokemons}) => {
 
-    const [types, setTypes] = useState([]);
+    useEffect(() => {
+        typesPokemons(); // Llamo al para obtener los tipos de pokemons.
+    }, [typesPokemons]);
+
     const [pokeStore, setpokeStore] = useState({
         nombre: '',
         imagen: '',
@@ -20,25 +26,6 @@ const Form = () => {
     const [tipo, setTipo] = useState([])
     const dataToSend = {...pokeStore, tipos: tipo};
     const [errors, setErrors] = useState({});
-    console.log("Esto es lo que me muestra la mierda ed tipo: ", tipo);
-
-//........... INICIO DE LA PETICION A LA BASE DE DATOS TYPES PARA OBTENER LOS TIPOS DE POKEMON ...........//
-
-    useEffect (() => {  // Uso useEffect para controlar cuándo se realiza la solicitud al backend. Esto asegura que la petición solo se realice cuando sea necesario.
-        const fetchdata = async () => { // Con async, función asincronica puedo hacer que el código sea más legible y fácil de mantener. Realizo una espera hasta obtener los datos necesarios o un error
-            try {  // Con try puedo manejar mejor los errores que pudieran ocurrir con a solicitud
-                const {data} = await axios("http://localhost:3001/pokemonsdb/types");
-                setTypes(data);
-                
-            } catch (error) {
-                window.alert('No hay un pokemon con ese ID');
-            }
-        }
-        fetchdata();
-    }, []);
-
-//........... FIN DE LA PETICION A LA BASE DE DATOS TYPES ...........//
-
 
 //........... INICIO DEL POST A BASE DE DATOS DEL POKEMON CARGADO ...........//
 
@@ -46,18 +33,15 @@ const Form = () => {
         const URL = "http://localhost:3001/pokemonsdb/pokemons";
         
         try {
-            const response = await axios.post(URL, dataToSend);
-            console.log("Esto recibe response:", response);
+            await axios.post(URL, dataToSend);
         } catch (error) {
             console.error("Error al enviar los datos:", error);
         }
     }
 
-
-
-
 //........... FIN DEL POST A BASE DE DATOS DEL POKEMON CARGADO ...........//
 
+//........... INICIO DE LA FUNCION QUE VA A REGISTRAR CADA EVENTO DEL FORMULARIO ..........//
     const handleInputChange = (event) => {
         const { name, value, options } = event.target;
         if (name === 'tipo') { // Solo para el <select> de tipos
@@ -89,13 +73,14 @@ const Form = () => {
         }
         else {
             setpokeStore(prevData => ({
-            ...prevData,
-            [name]: value,
-        }));
-    }
-        // }
+                ...prevData,
+                [name]: value,
+            }));
+        }
         // setErrors(validate({ ...pokeStore, [name]: value })); //Con esta linea controlo los errores
     };
+//........... FIN DE LA FUNCION QUE REGISTRA CADA EVENTO DEL FORMULARIO ..........//
+
 
     const validateForm = () => {
         const newErrors = validate(pokeStore);
@@ -186,42 +171,20 @@ const Form = () => {
                     </div>
                         </div>
                     <button className={style.buttomForm} type="submit" >Agregar</button>
-                </form>
-                
+                </form>               
             </div>
-
-{/** COMIENZO DE LA SEGUNDA VISTA DONDE APARECERAN LOS DATOS QUE SE VAN  CARGANDO  */}
-            <div className={style.formulario}>
-                <h2>Previsualización de datos</h2>
-                <div className={style.containerCard}>
-                    <h2 className={style.text}>Nombre: {pokeStore.nombre}</h2>
-                    {pokeStore.imagen && (
-                        <img className={style.img} 
-                          src={pokeStore.imagen}
-                          alt="Imagen seleccionada"
-                        />
-                    )}
-                    {/* src={pokeStore.imagen} alt='' /> */}
-                    <div className={style.cardFLex}>
-                    <h2 className={style.text}>Vida: {pokeStore.vida}</h2>
-                    <h2 className={style.text}>Ataque: {pokeStore.ataque}</h2>
-                    <h2 className={style.text}>Defensa: {pokeStore.defensa}</h2>
-                    <h2 className={style.text}>Velocidad: {pokeStore.velocidad}</h2>
-                    <h2 className={style.text}>Altura: {pokeStore.altura}</h2>
-                    <h2 className={style.text}>Peso: {pokeStore.peso}</h2>
-                    </div>
-                    <h2 className={style.typeText}> Tipo/s: 
-                    {tipo && tipo.map((type, index) => (
-                        <span key={index} className={style.type}>
-                            {" " + type.value}
-                            {index !== tipo.length - 1 && 
-                            <span className={style.typeSeparator}>{" "}-{" "}</span>}
-                        </span>
-                    ))}
-                    </h2>
-                </div>
-            </div>
+            <Previsualization pokeStore= {pokeStore} tipo= {tipo}/> {/** iNVOCO LA SEGUNDA VISTA DONDE APARECERAN LOS DATOS QUE SE VAN CARGANDO  */}
         </div>
     )
 }
-export default Form;
+const mapStateToProps = (state) => {
+    return {
+      types: state.types // Mapea el estado de los pokémons desde el store al componente.
+    };
+  };
+  
+  const mapDispatchToProps = {
+    typesPokemons // Mapea la acción para obtener los pokémons al componente.
+  };
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(Form);

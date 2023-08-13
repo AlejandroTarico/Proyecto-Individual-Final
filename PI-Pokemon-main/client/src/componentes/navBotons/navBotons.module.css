@@ -1,0 +1,26 @@
+.header {
+    background-color: #afd696f5;
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    position: fixed;
+    width: 100%;
+    margin-top: 72px;
+}
+nav {
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+}
+nav a {
+    text-decoration: none;
+    padding: 5px 0px;
+    color: #2776b5;
+    cursor: pointer;
+    background-color: #fff;
+    font-size: 17px;
+    width: 20%;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 10px 0px;
+}
