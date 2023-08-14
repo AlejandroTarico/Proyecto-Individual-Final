@@ -44,6 +44,9 @@ const Form = ({types, typesPokemons}) => {
 //........... INICIO DE LA FUNCION QUE VA A REGISTRAR CADA EVENTO DEL FORMULARIO ..........//
     const handleInputChange = (event) => {
         const { name, value, options } = event.target;
+
+        let updatedErrors = { ...errors }; // cargo en esta variable el objeto errors 
+
         if (name === 'tipo') { // Solo para el <select> de tipos
             const selectedOptions = [];
             let ban = false;
@@ -76,8 +79,11 @@ const Form = ({types, typesPokemons}) => {
                 ...prevData,
                 [name]: value,
             }));
+
+            updatedErrors[name] = validate({ ...pokeStore, [name]: value })[name]; // actualizo el objeto con el error referente a ese input
         }
         // setErrors(validate({ ...pokeStore, [name]: value })); //Con esta linea controlo los errores
+        setErrors(updatedErrors);
     };
 //........... FIN DE LA FUNCION QUE REGISTRA CADA EVENTO DEL FORMULARIO ..........//
 
@@ -164,7 +170,6 @@ const Form = ({types, typesPokemons}) => {
                                 {types && types.map(type => (
                                     <option key={type.id} id={type.id} value={type.name}> {/* PARA NO CONFUNDIRME PORTANTOS TYPE Y TYPES, ESTE TYPE ES UNA VARIABLE QUE SE CREA PARA EL MAP E IR RENDERIZANDO EL CONTENIDO DE TYPES EL CUAL CONTIENE LA INFORMACION OBTENIDA DE LA BASE DE DATOS */}
                                         {type.name}
-                                        {/* {console.log("Esto es lo que viene en tipo: ", type)} */}
                                     </option>
                                 ))}
                             </select>

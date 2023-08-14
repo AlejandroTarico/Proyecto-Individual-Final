@@ -24,3 +24,6 @@ nav a {
     font-weight: bold;
     border-radius: 10px 0px;
 }
+/* option[disabled] {
+    display: none;
+} */

@@ -1,7 +1,5 @@
-// import { useEffect, useState } from 'react';
 import style from './Form.module.css'
-// import { connect } from "react-redux";
-// import { typesPokemons } from "../../redux/actions"; 
+
 
 
 const Previsualization = (props) => {

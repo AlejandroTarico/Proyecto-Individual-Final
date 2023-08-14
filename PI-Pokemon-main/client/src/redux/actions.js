@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const FETCH_POKEMONS_SUCCESS = "FETCH_POKEMONS_SUCCESS";
 export const FETCH_TYPES_SUCCESS = "FETCH_TYPES_SUCCESS";
+export const FETCH_IDTYPE_SUCCESS = "FETCH_IDTYPE_SUCCESS";
+export const FETCH_SORT_SUCCESS = "FETCH_SORT_SUCCESS";
 
 export const fetchPokemonsSuccess = (pokemons) => {
   return {
@@ -14,7 +16,19 @@ export const fetchTiposSuccess = (types) => {
       type: FETCH_TYPES_SUCCESS,
       payload: types
     };
-  };
+};
+export const filterByTypes = (idType) => {
+    return {
+        type: FETCH_IDTYPE_SUCCESS,
+        payload: idType
+    };
+};
+export const filterBySort = (idType) => {
+    return {
+        type: FETCH_SORT_SUCCESS,
+        payload: idType
+    }
+}
 
 export const fetchPokemons = () => {
     return async (dispatch) => {
