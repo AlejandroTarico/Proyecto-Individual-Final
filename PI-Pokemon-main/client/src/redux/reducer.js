@@ -4,7 +4,8 @@ import {
     FETCH_POKEMONS_SUCCESS,
     FETCH_TYPES_SUCCESS,
     FETCH_IDTYPE_SUCCESS,
-    FETCH_SORT_SUCCESS
+    FETCH_SORT_SUCCESS,
+    FETCH_ATTACK_SUCCESS
 } from "./actions";
 
 const initialState = {
@@ -45,20 +46,35 @@ const rootReducer = (state = initialState, action) => {
             pokemons: typesFilter
         };
         case FETCH_SORT_SUCCESS:
-            const sortedPokemons = [...state.pokemons].sort((a, b) => {
-                console.log("PARA EL CASO DEL NAME DENTRO DEL sort ES: ", action.payload);
+            const pokeSort = [...state.pokemons].sort((a, b) => {
                 if (action.payload === "ascendente") {
                   return a.nombre.localeCompare(b.nombre);
                 } else if (action.payload === "descendente") {
                   return b.nombre.localeCompare(a.nombre);
                 }
                 return 0;
-              });
+            });
+            return {
+            ...state,
+            pokemons: pokeSort
+            };
+        case FETCH_ATTACK_SUCCESS:
+            const PokeAttack = [...state.pokemons].sort((a, b) => {
+                const ataqueA = a.ataque;
+                const ataqueB = b.ataque;
         
-              return {
+                if (action.payload === "debil") {
+                  return ataqueA - ataqueB;
+                } else if (action.payload === "fuerte") {
+                  return ataqueB - ataqueA;
+                }
+                return 0;
+            });
+        
+            return {
                 ...state,
-                pokemons: sortedPokemons
-              };
+                pokemons: PokeAttack
+            };
     default:
       return state;
   }
