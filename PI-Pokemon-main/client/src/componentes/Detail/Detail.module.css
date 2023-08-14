@@ -8,7 +8,7 @@
     display: inline-block;
     text-align: center;
     padding: 15px;
-    width: 50%;
+    width: 40%;
 }
 
 .textoDesing {
@@ -21,5 +21,34 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    padding-top: 75px;
+    padding-top: 20px;
+}
+.textTitle {
+    font-size: 30px;
+    color: #fff;
+    margin-top: 5px;
+    padding: 2px 0px 7px;
+    background-color: #1fa598;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+.text {
+    font-size: 25px;
+    color: #fff;
+    margin-top: 5px;
+    padding: 4px 0px 7px;
+    background-color: #1fa598;
+    border-radius: 5px;
+}
+.cajaImg {
+    background-color: #7aa85d;
+    width: 27rem;
+    height: 20rem;
+    padding: 40px 0px;
+    border-radius: 25rem;
+    display: inline-block;
+}
+.designImg {
+    width: 18rem;
+    /* margin-left: 25px; */
 }

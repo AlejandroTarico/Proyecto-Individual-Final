@@ -7,25 +7,32 @@
     width: 100%;
     margin-top: 72px;
 }
-
-
-/* nav {
-    width: 65%;
-    display: flex;
-    justify-content: space-between;
-} */
-/* nav a {
-    text-decoration: none;
-    padding: 5px 0px;
-    color: #2776b5;
-    cursor: pointer;
-    background-color: #fff;
-    font-size: 17px;
-    width: 20%;
-    text-align: center;
-    font-weight: bold;
+.inputText {
     border-radius: 10px 0px;
-} */
-/* option[disabled] {
-    display: none;
-} */
+    padding: 6px 5px;
+    border: solid 5px #dfdaccee;
+    color: #494e4e;
+    font-size: 14px;
+    width: 125px;
+    font-weight: 650;
+}
+.containerSelect {
+    display: flex;
+}
+.textSpan {
+    margin: 8px 10px 0px;
+    color: #727272;
+    font-weight: bold;
+    font-size: 17px;
+}
+.textSelect {
+    color: #494e4e;
+    font-size: 14px;
+    width: 125px;
+    font-weight: 650;
+}
+.cajaSelects {
+    width: 80%;
+    display: flex;
+    justify-content: space-evenly;
+}

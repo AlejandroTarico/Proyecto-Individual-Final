@@ -166,7 +166,7 @@ const Form = ({types, typesPokemons}) => {
                         </div>
                         <div className={style.flexText}>
                             <span className={style.text}>Tipo/s</span> 
-                            <select className={style.inputText} name='tipo' value={tipo}  onChange={handleInputChange}  multiple>
+                            <select className={style.inputText} name='tipo' value={tipo} type="selected" onChange={handleInputChange}  multiple>
                                 {types && types.map(type => (
                                     <option key={type.id} id={type.id} value={type.name}> {/* PARA NO CONFUNDIRME PORTANTOS TYPE Y TYPES, ESTE TYPE ES UNA VARIABLE QUE SE CREA PARA EL MAP E IR RENDERIZANDO EL CONTENIDO DE TYPES EL CUAL CONTIENE LA INFORMACION OBTENIDA DE LA BASE DE DATOS */}
                                         {type.name}

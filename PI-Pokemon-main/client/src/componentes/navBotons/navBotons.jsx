@@ -16,43 +16,44 @@ const NavBotons = ({types, typesPokemons, filterByTypes, filterBySort, filterByA
     return(
         <>
             <div className={style.header}>
-                <nav>
-                    <div>
-                        <span>Por Tipo</span>
-                        <select defaultValue='tipos' onChange={(e) => filterByTypes(e.target.value)}>
-                            <option  value="Types" hidden>Tipos</option>
-                            <option  value="allTypes">Todos los Tipos</option>
+                <div className={style.cajaSelects}>
+                    <div className={style.containerSelect}>
+                        <span className={style.textSpan}>Por Tipo</span>
+                        <select className={style.inputText} defaultValue='tipos' onChange={(e) => filterByTypes(e.target.value)}>
+                            <option className= {style.textSelect} value="Types" hidden>Tipos</option>
+                            <option className= {style.textSelect} value="allTypes">Todos los Tipos</option>
                             {types && types.map(type => (
-                                <option key={type.id} value={type.name}> {/* PARA NO CONFUNDIRME PORTANTOS TYPE Y TYPES, ESTE TYPE ES UNA VARIABLE QUE SE CREA PARA EL MAP E IR RENDERIZANDO EL CONTENIDO DE TYPES EL CUAL CONTIENE LA INFORMACION OBTENIDA DE LA BASE DE DATOS */}
+                                <option className= {style.textSelect} key={type.id} value={type.name}> {/* PARA NO CONFUNDIRME PORTANTOS TYPE Y TYPES, ESTE TYPE ES UNA VARIABLE QUE SE CREA PARA EL MAP E IR RENDERIZANDO EL CONTENIDO DE TYPES EL CUAL CONTIENE LA INFORMACION OBTENIDA DE LA BASE DE DATOS */}
                                     {type.name}
                                 </option>
                             ))}
                         </select>
                     </div>
-                    <div>
-                        <span>Origen</span>
-                        <select name="" id="">
-                            <option value="">Api</option>
-                            <option value="">DataBase</option>
-                        </select>
-                    </div>
-                    <div>
-                        <span>Ordenar Alfabeticamente</span>
-                        <select onChange={(e) => filterBySort(e.target.value)}>
+                    <div className={style.containerSelect}>
+                        <span className={style.textSpan}>Ordenar Alfabeticamente</span>
+                        <select className={style.inputText} onChange={(e) => filterBySort(e.target.value)}>
                             <option value="" hidden>Selecciona</option>
-                            <option value="ascendente">Ascendente</option>
-                            <option value="descendente">Descendente</option>
+                            <option className= {style.textSelect} value="ascendente">Ascendente</option>
+                            <option className= {style.textSelect} value="descendente">Descendente</option>
                         </select>
                     </div>
-                    <div>
-                        <span>Ordenar Por Ataque</span>
-                        <select onChange={(e) => filterByAttack(e.target.value)}>
+                    <div className={style.containerSelect}>
+                        <span className={style.textSpan}>Ordenar Por Ataque</span>
+                        <select className={style.inputText} onChange={(e) => filterByAttack(e.target.value)}>
                             <option value="" hidden>Selecciona</option>
-                            <option value="debil">Debil a Fuerte</option>
-                            <option value="fuerte">Fuerte a Debil</option>
+                            <option className= {style.textSelect} value="debil">Debil a Fuerte</option>
+                            <option className= {style.textSelect} value="fuerte">Fuerte a Debil</option>
                         </select>
                     </div>
-                </nav>
+                    <div className={style.containerSelect}>
+                        <span className={style.textSpan}>Origen</span>
+                        <select className={style.inputText} name="" id="">
+                            <option value="" hidden>Selecciona</option>
+                            <option className= {style.textSelect} value="">Api</option>
+                            <option className= {style.textSelect} value="">DataBase</option>
+                        </select>
+                    </div>
+                </div>
             </div>
         </>
     )

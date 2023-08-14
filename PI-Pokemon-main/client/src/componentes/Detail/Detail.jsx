@@ -25,8 +25,11 @@ const Detail = () => {
   return (
     pokemon ?
     <div className={style.containerCard}>
-        <h2 className={style.text}>{pokemon.nombre}</h2>
-        <img className={style.img} src={pokemon.imagen} alt='' />
+        <h2 className={style.textTitle}>{pokemon.nombre}</h2>
+        <div className={style.cajaImg}>
+          <img className={style.designImg} src={pokemon.imagen} alt='' />
+
+        </div>
         <div className={style.cardFLex}>
           <h2 className={style.text}>Vida: {pokemon.vida}</h2>
           <h2 className={style.text}>Ataque: {pokemon.ataque}</h2>
@@ -35,7 +38,7 @@ const Detail = () => {
           <h2 className={style.text}>Altura: {pokemon.altura}</h2>
           <h2 className={style.text}>Peso: {pokemon.peso}</h2>
         </div>
-        <h2 className={style.typeText}> Tipo/s: 
+        <h2 className={style.text}> Tipo/s: 
           {/* { pokemon.tipo && pokemon.tipo.map((types) => types.tipo + " ") } */}
           {pokemon.tipo && pokemon.tipo.map((type, index) => (
             <span key={index} className={style.type}>

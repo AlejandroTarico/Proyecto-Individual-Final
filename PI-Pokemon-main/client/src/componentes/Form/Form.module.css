@@ -31,6 +31,7 @@
     font-weight: bold;
     font-size: 20px;
     margin-top: 10px;
+    text-transform: capitalize;
 }
 .flexText {
     display: flex;
@@ -43,7 +44,7 @@
     border: solid 5px #f3b810d9;
     color: #494e4e;
     font-size: 15px;
-    width: 60%;
+    width: 55%;
     font-weight: 650;
 }
 
@@ -56,7 +57,7 @@ select:focus {
 }
 
 select[type="selected"]{
-    width: 66%;
+    width: 63%;
 }
 
 .buttomForm {
