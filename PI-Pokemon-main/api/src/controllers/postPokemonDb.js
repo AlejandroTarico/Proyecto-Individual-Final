@@ -19,7 +19,7 @@ const postPokemonDb = async (req, res) => {
                     pokemonId: pokeStore.id,
                     typeId: tipoObj.id
                 });
-            }            
+            }
             res.status(200).json({message: "La carga de tu pokemon se ha echo satisfactoriamente"});
         }
     } catch (error) {

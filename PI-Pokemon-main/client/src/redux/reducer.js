@@ -5,7 +5,9 @@ import {
     FETCH_TYPES_SUCCESS,
     FETCH_IDTYPE_SUCCESS,
     FETCH_SORT_SUCCESS,
-    FETCH_ATTACK_SUCCESS
+    FETCH_ATTACK_SUCCESS,
+    // FETCH_NAMEDA_SUCCESS,
+    // FETCH_SEARCHDBAPI_SUCCESS
 } from "./actions";
 
 const initialState = {
@@ -17,40 +19,40 @@ const initialState = {
 };
 
 const rootReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case FETCH_POKEMONS_SUCCESS:
-        return {
-            ...state,
-            pokemons: action.payload,
-            pokeRespaldo: action.payload
-        };
-    case FETCH_TYPES_SUCCESS:
-        return {
-            ...state,
-            types: action.payload
-        };
-    case FETCH_IDTYPE_SUCCESS:
-        console.log("ESTO LLEGA A REDUCER POR ACTION PAYLOAD: ", action.payload);
-        const allpokemons = state.pokeRespaldo;
-        const typesFilter = action.payload === 'allTypes' ? allpokemons : allpokemons.filter((poke) => {
-            for(let i = 0; i < poke.tipo.length; i++){
-                if(poke.tipo[i].tipo === action.payload) {
-                    console.log("PARA EL CASO DEL NAME DENTRO DEL IF ES: ", poke.tipo[i].tipo);
-                    return true;
+    switch (action.type) {
+        case FETCH_POKEMONS_SUCCESS:
+            return {
+                ...state,
+                pokemons: action.payload,
+                pokeRespaldo: action.payload
+            };
+        case FETCH_TYPES_SUCCESS:
+            return {
+                ...state,
+                types: action.payload
+            };
+        case FETCH_IDTYPE_SUCCESS:
+            console.log("ESTO LLEGA A REDUCER POR ACTION PAYLOAD: ", action.payload);
+            const allpokemons = state.pokeRespaldo;
+            const typesFilter = action.payload === 'allTypes' ? allpokemons : allpokemons.filter((poke) => {
+                for(let i = 0; i < poke.tipo.length; i++){
+                    if(poke.tipo[i].tipo === action.payload) {
+                        console.log("PARA EL CASO DEL NAME DENTRO DEL IF ES: ", poke.tipo[i].tipo);
+                        return true;
+                    }
                 }
-            }
-            return false;
-        });
-        return {
-            ...state, 
-            pokemons: typesFilter
-        };
+                return false;
+            });
+            return {
+                ...state, 
+                pokemons: typesFilter
+            };
         case FETCH_SORT_SUCCESS:
             const pokeSort = [...state.pokemons].sort((a, b) => {
                 if (action.payload === "ascendente") {
-                  return a.nombre.localeCompare(b.nombre);
+                    return a.nombre.localeCompare(b.nombre);
                 } else if (action.payload === "descendente") {
-                  return b.nombre.localeCompare(a.nombre);
+                    return b.nombre.localeCompare(a.nombre);
                 }
                 return 0;
             });
@@ -64,9 +66,9 @@ const rootReducer = (state = initialState, action) => {
                 const ataqueB = b.ataque;
         
                 if (action.payload === "debil") {
-                  return ataqueA - ataqueB;
+                    return ataqueA - ataqueB;
                 } else if (action.payload === "fuerte") {
-                  return ataqueB - ataqueA;
+                    return ataqueB - ataqueA;
                 }
                 return 0;
             });
@@ -75,6 +77,8 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 pokemons: PokeAttack
             };
+        // case FETCH_DBAPI_SUCCESS:
+        //     const pokeDbApi = 
     default:
       return state;
   }

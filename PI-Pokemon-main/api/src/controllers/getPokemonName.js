@@ -8,7 +8,7 @@ const URL = "https://pokeapi.co/api/v2/pokemon/";
 const getPokemonName = async (req, res) => {
     try {
         const { name } = req.query;
-        // console.log("Pasa por aqui?", name);
+        let detailPokemon = [];
         const minoMayName = encodeURIComponent(name);
         const { data } = await axios(URL + minoMayName);
         const {id: id, name: nombre, height: altura, weight: peso } = data;
@@ -21,14 +21,13 @@ const getPokemonName = async (req, res) => {
             return { id: type.slot, tipo: type.type.name }
         })
         const allPokemonesApi = {id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso, tipo}
-        console.log("esto es lo que trae DATA DESMENUSADO +++++++");
-
+        detailPokemon.push({...allPokemonesApi});
         const allPokemonesDB = await Pokemon.findAll({
             where: { nombre: { [Op.iLike]: `%${nombre}%`},
             },
         });
-       const detailPokemon = {...allPokemonesApi, ...allPokemonesDB}
-    //    console.log("Veamos que me muestra el repo de la api", allPokemonesDB);
+       detailPokemon.push(...allPokemonesDB);
+    //    console.log("Veamos que me muestra el repo de la api y la base de datos: ", detailPokemon);
         return res.status(200).json(detailPokemon);
 
     } catch (error) {
