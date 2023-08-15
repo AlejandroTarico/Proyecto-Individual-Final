@@ -10,7 +10,9 @@ import Pagination from '../Utils/Pagination/Paginacion'; // Importa el component
 const PokeCards = ({ pokemons, fetchPokemons }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 12; // Número de elementos por página.
-
+    
+    
+    
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -57,6 +59,7 @@ const PokeCards = ({ pokemons, fetchPokemons }) => {
                     nombre= {poke.nombre}
                     tipo={poke.tipo} 
                     imagen= {poke.imagen}
+                    types= {poke.types}
                     />
                 })}
             </div>

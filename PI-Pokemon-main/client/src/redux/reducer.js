@@ -6,16 +6,17 @@ import {
     FETCH_IDTYPE_SUCCESS,
     FETCH_SORT_SUCCESS,
     FETCH_ATTACK_SUCCESS,
-    // FETCH_NAMEDA_SUCCESS,
-    // FETCH_SEARCHDBAPI_SUCCESS
+    FETCH_SEARCHID_SUCCESS,
+    FETCH_NAMEDA_SUCCESS,
+    FETCH_SEARCHDBAPI_SUCCESS
 } from "./actions";
 
 const initialState = {
-  pokemons: [],
-  pokeRespaldo: [],
-  pokeFilter: [],
-  types: [],
-
+    pokemons: [],
+    pokeRespaldo: [],
+    types: [],
+    pokeId: [],
+    pokeDbApi: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -32,12 +33,10 @@ const rootReducer = (state = initialState, action) => {
                 types: action.payload
             };
         case FETCH_IDTYPE_SUCCESS:
-            console.log("ESTO LLEGA A REDUCER POR ACTION PAYLOAD: ", action.payload);
             const allpokemons = state.pokeRespaldo;
             const typesFilter = action.payload === 'allTypes' ? allpokemons : allpokemons.filter((poke) => {
                 for(let i = 0; i < poke.tipo.length; i++){
                     if(poke.tipo[i].tipo === action.payload) {
-                        console.log("PARA EL CASO DEL NAME DENTRO DEL IF ES: ", poke.tipo[i].tipo);
                         return true;
                     }
                 }
@@ -77,8 +76,34 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 pokemons: PokeAttack
             };
-        // case FETCH_DBAPI_SUCCESS:
-        //     const pokeDbApi = 
+        case FETCH_SEARCHID_SUCCESS:
+            console.log("REDUCERS: ", action.payload);
+            const pokeFinded = state.pokemons.filter((poke) => poke.id === Number(action.payload) || poke.id === action.payload);
+            console.log("REDUCERS despues del filtro: ", pokeFinded, state.pokemons);
+            return {
+                ...state,
+                pokeId: pokeFinded[0]
+            }
+        case FETCH_SEARCHDBAPI_SUCCESS:
+            return {
+                ...state,
+                pokemons: action.payload,
+                pokeDbApi: action.payload
+            }
+        case FETCH_NAMEDA_SUCCESS:
+            const bydataOrApi = state.pokeDbApi.filter((poke) => {
+                if(typeof(poke.id) === 'number' && action.payload === 'api') {
+                    return true;
+                }
+                else if(typeof(poke.id) === 'string' && action.payload === 'database') {
+                    return true;
+                }
+                else return 0;
+            });
+            return {
+                ...state,
+                pokemons: bydataOrApi
+            }
     default:
       return state;
   }

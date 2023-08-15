@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Pokemon } = require('../db');
+const { Pokemon, Type } = require('../db');
 const { Op } = require('sequelize');
 
 const URL = "https://pokeapi.co/api/v2/pokemon/";
@@ -16,7 +16,7 @@ const getPokemonName = async (req, res) => {
         const ataque = data.stats[1].base_stat;
         const defensa = data.stats[2].base_stat;
         const velocidad = data.stats[5].base_stat;
-        const imagen = data.sprites.front_default;
+        const imagen = data.sprites.other.dream_world.front_default;
         const tipo = data.types.map((type) => {
             return { id: type.slot, tipo: type.type.name }
         })
@@ -25,9 +25,12 @@ const getPokemonName = async (req, res) => {
         const allPokemonesDB = await Pokemon.findAll({
             where: { nombre: { [Op.iLike]: `%${nombre}%`},
             },
+            include: [{ model: Type, attributes: ['id', 'name'], through: { attributes: [] } }],
+            logging: console.log,
+            // include: { model: Type, as: 'type', atributes: ['name'], through: { atributes: [] }}
         });
        detailPokemon.push(...allPokemonesDB);
-    //    console.log("Veamos que me muestra el repo de la api y la base de datos: ", detailPokemon);
+       console.log("Veamos que me muestra el repo de la api y la base de datos: ", allPokemonesDB);
         return res.status(200).json(detailPokemon);
 
     } catch (error) {

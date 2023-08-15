@@ -99,7 +99,22 @@ const Form = ({types, typesPokemons}) => {
         const isValid = validateForm();
         
         if(isValid){
-            storePokemonDb()
+            storePokemonDb();
+            alert("Se cargo con exito tu pokemon");
+            setpokeStore({
+                nombre: '',
+                imagen: '',
+                vida: '',
+                ataque: '',
+                defensa: '',
+                velocidad: '',
+                altura: '',
+                peso: '',
+            });
+            setTipo([]);
+        }
+        else{
+            alert("No se pudo cargar, asegurate de que los campos obligatorios estén cargados correctamente")
         }
     }
 
@@ -114,14 +129,14 @@ const Form = ({types, typesPokemons}) => {
                     <div className={style.cardFLex}>
                         <div>
                             <div className={style.flexText}>
-                                <span className={style.text}>Nombre</span> 
+                                <span className={style.text}>Nombre*</span> 
                                 <input className={style.inputText} type="text" name='nombre' value={pokeStore.nombre}  onChange={handleInputChange}/>
                             </div>
                             {errors.nombre && <p>{errors.nombre}</p>}
                         </div>
                         <div>
                             <div className={style.flexText}>
-                                <span className={style.text}>Imagen</span> 
+                                <span className={style.text}>Imagen*</span> 
                                 {/* <label className={style.customFileInput}> Cargar archivo
                                     <input type="file" name='imagen' value={pokeStore.imagen} onChange={handleInputChange}/>
                                 </label> */}
@@ -131,21 +146,21 @@ const Form = ({types, typesPokemons}) => {
                         </div>
                         <div>
                             <div className={style.flexText}>
-                                <span className={style.text}>Vida</span> 
+                                <span className={style.text}>Vida*</span> 
                                 <input className={style.inputText} name='vida' value={pokeStore.vida} type="text"  onChange={handleInputChange}/>
                             </div>
                             {errors.vida && <p>{errors.vida}</p>}
                         </div>
                         <div>
                             <div className={style.flexText}>
-                                <span className={style.text}>Ataque</span> 
+                                <span className={style.text}>Ataque*</span> 
                                 <input className={style.inputText} name='ataque' value={pokeStore.ataque} type="text"  onChange={handleInputChange}/>
                             </div>
                             {errors.ataque && <p>{errors.ataque}</p>}
                         </div>
                         <div>
                             <div className={style.flexText}>
-                                <span className={style.text}>Defensa</span> 
+                                <span className={style.text}>Defensa*</span> 
                                 <input className={style.inputText} name='defensa' value={pokeStore.defensa} type="text"  onChange={handleInputChange}/>
                             </div>
                             {errors.defensa && <p>{errors.defensa}</p>}

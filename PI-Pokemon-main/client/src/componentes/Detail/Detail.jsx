@@ -1,25 +1,26 @@
-import axios from 'axios';
-import { useState, useEffect  } from 'react';
+import { useEffect  } from 'react';
 import { useParams } from 'react-router-dom';
 import style from './Detail.module.css'
-const Detail = () => {
+import { connect } from "react-redux";
+import { searchPokemonsId } from "../../redux/actions"; 
+
+
+const Detail = ({ pokemon, searchPokemonsId }) => {
   const {id} = useParams();
-  const [pokemon, setPokemon] = useState({});
+  console.log("ESTO ESTA LLEGANDO A DETAIL: ", pokemon);
 
 
-  useEffect (() => {  // Uso useEffect para controlar cuándo se realiza la solicitud al backend. Esto asegura que la petición solo se realice cuando sea necesario.
-        const fetchdata = async () => { // Con async, función asincronica puedo hacer que el código sea más legible y fácil de mantener. Realizo una espera hasta obtener los datos necesarios o un error
-            try {  // Con try puedo manejar mejor los errores que pudieran ocurrir con a solicitud
-                const {data} = await axios(`http://localhost:3001/pokemonsapi/pokemons/${id}`);
-                setPokemon(data);
-                
-            } catch (error) {
-                window.alert('No hay un pokemon con ese ID');
-            }
-            // return setCharacter({});
-        }
-        fetchdata();
-    }, [id]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await searchPokemonsId(id); // Llamo al actions para obtener los pokémons.
+      } catch (error) {
+        console.error('Error al obtener los pokémons:', error);
+      }
+    };
+  
+    fetchData();
+  }, [searchPokemonsId, id]);
   
  
   return (
@@ -39,11 +40,17 @@ const Detail = () => {
           <h2 className={style.text}>Peso: {pokemon.peso}</h2>
         </div>
         <h2 className={style.text}> Tipo/s: 
-          {/* { pokemon.tipo && pokemon.tipo.map((types) => types.tipo + " ") } */}
           {pokemon.tipo && pokemon.tipo.map((type, index) => (
             <span key={index} className={style.type}>
                 {" " + type.tipo}
                 {index !== pokemon.tipo.length - 1 && 
+                <span className={style.typeSeparator}>{" "}-{" "}</span>}
+            </span>
+          ))}
+          {pokemon.types && pokemon.types.map((type, index) => (
+            <span key={index} className={style.type}>
+                {" " + type.name}
+                {index !== pokemon.types.length - 1 && 
                 <span className={style.typeSeparator}>{" "}-{" "}</span>}
             </span>
           ))}
@@ -54,5 +61,14 @@ const Detail = () => {
     <h1>Loading...</h1>
   )
 }
+const mapStateToProps = (state) => {
+  return {
+    pokemon: state.pokeId // Mapea el estado de los pokémons desde el store al componente.
+  };
+};
 
-export default Detail
+const mapDispatchToProps = {
+  searchPokemonsId // Mapea la acción para obtener los pokémons al componente.
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Detail);

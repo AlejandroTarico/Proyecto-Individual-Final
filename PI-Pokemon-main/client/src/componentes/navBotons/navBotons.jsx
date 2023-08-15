@@ -1,16 +1,23 @@
 // import store from "../../redux/store.js"
 import style from "./navBotons.module.css"
 import { connect } from "react-redux";
-import { typesPokemons, filterByTypes, filterBySort, filterByAttack } from "../../redux/actions"; 
+import { typesPokemons, filterByTypes, filterBySort, filterByAttack, filterByDatabApi } from "../../redux/actions"; 
 import { useEffect } from "react"
 
-const NavBotons = ({types, typesPokemons, filterByTypes, filterBySort, filterByAttack}) => {
+const NavBotons = ({types, typesPokemons, filterByTypes, filterBySort, filterByAttack, filterByDatabApi}) => {
 // const tipos = store.getState().types;
 // console.log("esto es lo que obtengo del estore: ", tipos); // ESto me serviria si y solo si, hiciera que la peticion a
 // los typos se realice en el momento que se ingresa a la pagina, como si pasa con los pokemons.
 
     useEffect(() => {
-        typesPokemons(); // Llamo al para obtener los tipos de pokemons.
+        const fetchData = async () => {
+            try {
+                await typesPokemons(); // Llamo al para obtener los tipos de pokemons.
+            } catch (error) {
+                console.error('Error al obtener los pokémons:', error);
+            }
+        };
+        fetchData();
     }, [typesPokemons]);
 
     return(
@@ -47,10 +54,10 @@ const NavBotons = ({types, typesPokemons, filterByTypes, filterBySort, filterByA
                     </div>
                     <div className={style.containerSelect}>
                         <span className={style.textSpan}>Origen</span>
-                        <select className={style.inputText} name="" id="">
+                        <select className={style.inputText} onChange={(e) => filterByDatabApi(e.target.value)}>
                             <option value="" hidden>Selecciona</option>
-                            <option className= {style.textSelect} value="">Api</option>
-                            <option className= {style.textSelect} value="">DataBase</option>
+                            <option className= {style.textSelect} value="api">Api</option>
+                            <option className= {style.textSelect} value="database">DataBase</option>
                         </select>
                     </div>
                 </div>
@@ -70,7 +77,8 @@ const mapStateToProps = (state) => {
     typesPokemons, // Mapea la acción para obtener los pokémons al componente.
     filterByTypes,
     filterBySort,
-    filterByAttack
+    filterByAttack,
+    filterByDatabApi
   };
   
   export default connect(mapStateToProps, mapDispatchToProps)(NavBotons);

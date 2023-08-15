@@ -5,6 +5,7 @@ export const FETCH_TYPES_SUCCESS = "FETCH_TYPES_SUCCESS";
 export const FETCH_IDTYPE_SUCCESS = "FETCH_IDTYPE_SUCCESS";
 export const FETCH_SORT_SUCCESS = "FETCH_SORT_SUCCESS";
 export const FETCH_ATTACK_SUCCESS = "FETCH_ATTACK_SUCCESS";
+export const FETCH_SEARCHID_SUCCESS = "FETCH_SEARCHID_SUCCESS";
 export const FETCH_NAMEDA_SUCCESS = "FETCH_NAMEDA_SUCCESS";
 export const FETCH_SEARCHDBAPI_SUCCESS = "FETCH_SEARCHDBAPI_SUCCESS";
 
@@ -47,9 +48,17 @@ export const filterByDatabApi = (nameDbApi) => {
 export const searchByDataBaseApi = (dataBApi) => {
     return {
         type: FETCH_SEARCHDBAPI_SUCCESS,
-        payload: fetchNameDbApi(dataBApi)
+        payload: dataBApi
     };
 };
+export const searchPokemonsId = (pokeID) => {
+    console.log("ACTIONS: ", pokeID);
+    return {
+        type: FETCH_SEARCHID_SUCCESS,
+        payload: pokeID
+    };
+};
+
 
 
 export const fetchPokemons = () => {
@@ -75,15 +84,15 @@ export const typesPokemons = () => {
     }
 };
 
-export const fetchNameDbApi = () => {
+export const SearchNameDbApi = (nameDbApi) => {
     return async (dispatch) => {
         try {
-            const {data} = await axios("http://localhost:3001/pokemon");
-            console.log("ESTO ES LO QUE TRABE DATABASE Y API: ", data);
-            dispatch(fetchTiposSuccess(data));
+            const URL = "http://localhost:3001/pokemon";
+            const {data} = await axios(URL + `?name=${nameDbApi}`);
+            dispatch(searchByDataBaseApi(data));
             
         } catch (error) {
-            console.error("No se pudo obtener los tipos", error);
+            console.error("No se pudo obtener los pokemons buscados por su nombre", error);
         }
     }
 };
