@@ -1,13 +1,13 @@
 const { Type } = require('../db');
 
 
-const getPokemonType = async (req, res) => {
+const getPokemonType = async () => {
     try {
         const allTypes = await Type.findAll();
-        return res.status(200).json(allTypes);
+        return allTypes;
 
     } catch (error) {
-        res.status(500).json("Al parecer pasa de largo y no entra al try");
+        return "Al parecer pasa de largo y no entra al try";
     }
 }
 

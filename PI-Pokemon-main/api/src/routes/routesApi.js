@@ -1,12 +1,12 @@
 const { Router } = require('express');
-const getPokemonId = require('../controllers/getPokemonId');
-const getarrayobject = require('../controllers/getarrayobject');
+const {getAllPokemons, getpokeId} = require('../handlers/apiHandler');
 
 
 const router = Router();
 
 
-router.get('/pokemons', getarrayobject);
-router.get('/pokemons/:id', getPokemonId);
+router.get('/pokemons', getAllPokemons);
+// router.get('/pokemons/:id', getPokemonId);
+
 
 module.exports = router;

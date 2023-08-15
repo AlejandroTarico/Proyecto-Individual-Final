@@ -4,10 +4,8 @@ const { Pokemon } = require('../db')
 const URL = "https://pokeapi.co/api/v2/pokemon/";
 
 
-const getPokemonId = async (req, res) => {
+const getPokemonId = async (id) => {
     try {
-
-        const { id } = req.params;
         if (id.length < 30) {
             const { data } = await axios(URL + id);
             const {name: nombre, height: altura, weight: peso } = data;

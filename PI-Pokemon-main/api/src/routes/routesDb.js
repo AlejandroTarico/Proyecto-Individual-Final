@@ -1,12 +1,12 @@
 const { Router } = require('express');
-const postPokemonDb = require('../controllers/postPokemonDb');
-const getPokemonType = require('../controllers/getPokemonType');
+const {postDbHandler, getPokeByType} = require('../handlers/dataBaseHandler');
 
 
 const router = Router();
 
 
-router.get('/types', getPokemonType);
-router.post('/pokemons', postPokemonDb);
+router.get('/types', getPokeByType);
+router.post('/pokemons', postDbHandler);
 
 module.exports = router;
+

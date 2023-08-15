@@ -7,7 +7,6 @@ import { searchPokemonsId } from "../../redux/actions";
 
 const Detail = ({ pokemon, searchPokemonsId }) => {
   const {id} = useParams();
-  console.log("ESTO ESTA LLEGANDO A DETAIL: ", pokemon);
 
 
   useEffect(() => {

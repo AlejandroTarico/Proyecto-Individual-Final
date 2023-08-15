@@ -3,7 +3,7 @@ const axios = require('axios');
 const URL = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=20";
 
 
-const getarrayobject = async (req, res) => {
+const getarrayobject = async () => {
     try {
         const allPokemons = await axios(URL);
         const pokelist = allPokemons.data.results.map((pokemons) => axios(pokemons.url));
@@ -25,10 +25,10 @@ const getarrayobject = async (req, res) => {
                 })
             }
         });
-        return res.status(200).json(arrayPokemon);
+        return arrayPokemon;
 
     } catch (error) {
-        Error("Error al obtener los Pokémons desde la API externa.")
+        return "Error al obtener los Pokémons desde la API externa.";
     }
 }
 module.exports = getarrayobject;
