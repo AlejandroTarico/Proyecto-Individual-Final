@@ -6,6 +6,7 @@ const { Router } = require('express');
 const getPokemonName = require('../controllers/getPokemonName');
 const routesApi = require('./routesApi');
 const routesDb = require('./routesDb');
+
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -22,6 +23,7 @@ const router = Router();
 
 router.use('/pokemonsapi', routesApi)
 router.use('/pokemonsdb', routesDb)
+// router.use('/pokemon', pokemonDbApiHandler)
 router.get('/pokemon', getPokemonName);
 
 
