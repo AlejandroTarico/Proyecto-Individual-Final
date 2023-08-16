@@ -33,7 +33,21 @@ const Form = ({types, typesPokemons}) => {
         const URL = "http://localhost:3001/pokemonsdb/pokemons";
         
         try {
-            await axios.post(URL, dataToSend);
+            const result = await axios.post(URL, dataToSend);
+            alert(result.data.message);
+            if(result.data.value){
+                setpokeStore({
+                    nombre: '',
+                    imagen: '',
+                    vida: '',
+                    ataque: '',
+                    defensa: '',
+                    velocidad: '',
+                    altura: '',
+                    peso: '',
+                });
+                setTipo([]);
+            }
         } catch (error) {
             console.error("Error al enviar los datos:", error);
         }
@@ -100,18 +114,6 @@ const Form = ({types, typesPokemons}) => {
         
         if(isValid){
             storePokemonDb();
-            alert("Se cargo con exito tu pokemon");
-            setpokeStore({
-                nombre: '',
-                imagen: '',
-                vida: '',
-                ataque: '',
-                defensa: '',
-                velocidad: '',
-                altura: '',
-                peso: '',
-            });
-            setTipo([]);
         }
         else{
             alert("No se pudo cargar, asegurate de que los campos obligatorios estén cargados correctamente")

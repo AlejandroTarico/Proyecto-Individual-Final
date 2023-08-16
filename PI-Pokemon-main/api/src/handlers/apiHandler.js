@@ -5,7 +5,7 @@ const getarrayobject = require('../controllers/getarrayobject');
 const getAllPokemons = async (req, res) => {
 try {
     const allpoke = await getarrayobject()
-
+    
     res.status(200).send(allpoke);
     
 } catch (error) {

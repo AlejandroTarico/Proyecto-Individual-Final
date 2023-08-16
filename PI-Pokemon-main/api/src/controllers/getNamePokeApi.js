@@ -1,14 +1,11 @@
 const axios = require('axios');
-const { Type } = require('../db');
 
 
 const URL = "https://pokeapi.co/api/v2/pokemon/";
 
 
-const getPokemonName = async (req, res) => {
-    const { name } = req.query;
+const getPokemonNameApi = async (name) => {
     try {
-        let detailPokemon = [];
         const minoMayName = encodeURIComponent(name);
         const { data } = await axios(URL + minoMayName);
         const {id: id, name: nombre, height: altura, weight: peso } = data;
@@ -20,11 +17,10 @@ const getPokemonName = async (req, res) => {
         const tipo = data.types.map((type) => {
             return { id: type.slot, tipo: type.type.name }
         })
-        const allPokemonesApi = {id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso, tipo}
-        detailPokemon.push({...allPokemonesApi});
-        return 
+        const allPokemonesApi = {id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso, tipo};
+        return ({...allPokemonesApi});
     } catch (error) {
-        res.status(500).json({ error: "Error al obtener los datos de los Pokémons" });
+        return "Error al obtener los datos de los Pokémons desde la Api";
     }
 }
-module.exports = getPokemonName;
+module.exports = getPokemonNameApi;
