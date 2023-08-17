@@ -21,8 +21,8 @@ const getarrayobject = async () => {
                 defensa : pokexpoke.data.stats[2].base_stat,
                 velocidad : pokexpoke.data.stats[5].base_stat,
                 imagen : pokexpoke.data.sprites.other.dream_world.front_default,
-                tipo : pokexpoke.data.types.map((type) => {
-                    return { id: type.slot, tipo: type.type.name }
+                types : pokexpoke.data.types.map((type) => {
+                    return { id: type.slot, name: type.type.name }
                 })
             }
         });

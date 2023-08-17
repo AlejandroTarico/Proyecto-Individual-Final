@@ -16,27 +16,26 @@ const initialState = {
     pokeRespaldo: [],
     types: [],
     pokeId: [],
-    pokeDbApi: [],
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case FETCH_POKEMONS_SUCCESS:
+        case FETCH_POKEMONS_SUCCESS: // En este case estoy asignando los datos obtenidos desde la api a las propiedades del estado global
             return {
                 ...state,
                 pokemons: action.payload,
                 pokeRespaldo: action.payload
             };
-        case FETCH_TYPES_SUCCESS:
+        case FETCH_TYPES_SUCCESS: // En este ccase asigno los typos obtenidos desde la base de datos a la propiedad types del estado global
             return {
                 ...state,
                 types: action.payload
             };
-        case FETCH_IDTYPE_SUCCESS:
+        case FETCH_IDTYPE_SUCCESS: // Este case realiza un filtrado de al tipo que se haya elejido y que llega por action.payload
             const allpokemons = state.pokeRespaldo;
             const typesFilter = action.payload === 'allTypes' ? allpokemons : allpokemons.filter((poke) => {
-                for(let i = 0; i < poke.tipo.length; i++){
-                    if(poke.tipo[i].tipo === action.payload) {
+                for(let i = 0; i < poke.types.length; i++){
+                    if(poke.types[i].name === action.payload) {
                         return true;
                     }
                 }
@@ -46,7 +45,7 @@ const rootReducer = (state = initialState, action) => {
                 ...state, 
                 pokemons: typesFilter
             };
-        case FETCH_SORT_SUCCESS:
+        case FETCH_SORT_SUCCESS: // Ordena alfabeticamente ascendente o descendentemente
             const pokeSort = [...state.pokemons].sort((a, b) => {
                 if (action.payload === "ascendente") {
                     return a.nombre.localeCompare(b.nombre);
@@ -59,7 +58,7 @@ const rootReducer = (state = initialState, action) => {
             ...state,
             pokemons: pokeSort
             };
-        case FETCH_ATTACK_SUCCESS:
+        case FETCH_ATTACK_SUCCESS: // Ordena por ataque ya sea de debil a fuerte o también de fuerte a debil.
             const PokeAttack = [...state.pokemons].sort((a, b) => {
                 const ataqueA = a.ataque;
                 const ataqueB = b.ataque;
@@ -71,27 +70,25 @@ const rootReducer = (state = initialState, action) => {
                 }
                 return 0;
             });
-        
             return {
                 ...state,
                 pokemons: PokeAttack
             };
-        case FETCH_SEARCHID_SUCCESS:
+        case FETCH_SEARCHID_SUCCESS:  // En este case estoy haciendo una busqueda por id para luego poder utilizar la informacion dentro del componente Detail 
             console.log("REDUCERS: ", action.payload);
             const pokeFinded = state.pokemons.filter((poke) => poke.id === Number(action.payload) || poke.id === action.payload);
             console.log("REDUCERS despues del filtro: ", pokeFinded, state.pokemons);
             return {
                 ...state,
                 pokeId: pokeFinded[0]
-            }
-        case FETCH_SEARCHDBAPI_SUCCESS:
+            };
+        case FETCH_SEARCHDBAPI_SUCCESS: //Envía los typos de datos al componente form  
             return {
                 ...state,
                 pokemons: action.payload,
-                pokeDbApi: action.payload
-            }
-        case FETCH_NAMEDA_SUCCESS:
-            const bydataOrApi = state.pokeDbApi.filter((poke) => {
+            };
+        case FETCH_NAMEDA_SUCCESS: // Realiza un filtro de a cuerdo a su procedencia, ya sea de la api o de la base de datos
+            const bydataOrApi = state.pokeRespaldo.filter((poke) => {
                 if(typeof(poke.id) === 'number' && action.payload === 'api') {
                     return true;
                 }

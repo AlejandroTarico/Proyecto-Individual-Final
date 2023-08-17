@@ -14,10 +14,10 @@ const getPokemonId = async (id) => {
             const defensa = data.stats[2].base_stat;
             const velocidad = data.stats[5].base_stat;
             const imagen = data.sprites.other.dream_world.front_default;
-            const tipo = data.types.map((type) => {
-                return { id: type.slot, tipo: type.type.name }
+            const types = data.types.map((type) => {
+                return { id: type.slot, name: type.type.name }
             })
-            const detailPokemon = {nombre, imagen, vida, ataque, defensa, velocidad, altura, peso, tipo}
+            const detailPokemon = {nombre, imagen, vida, ataque, defensa, velocidad, altura, peso, types}
             return res.status(200).json(detailPokemon);
         }
         else {

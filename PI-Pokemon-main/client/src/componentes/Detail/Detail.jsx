@@ -39,13 +39,13 @@ const Detail = ({ pokemon, searchPokemonsId }) => {
           <h2 className={style.text}>Peso: {pokemon.peso}</h2>
         </div>
         <h2 className={style.text}> Tipo/s: 
-          {pokemon.tipo && pokemon.tipo.map((type, index) => (
+          {/* {pokemon.tipo && pokemon.tipo.map((type, index) => (
             <span key={index} className={style.type}>
                 {" " + type.tipo}
                 {index !== pokemon.tipo.length - 1 && 
                 <span className={style.typeSeparator}>{" "}-{" "}</span>}
             </span>
-          ))}
+          ))} */}
           {pokemon.types && pokemon.types.map((type, index) => (
             <span key={index} className={style.type}>
                 {" " + type.name}

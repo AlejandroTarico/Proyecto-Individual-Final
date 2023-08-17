@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 
 
 function Card(props) {
-   const{id, nombre, imagen, tipo, types}= props; //Estoy haciendo un distroctoring al props
+   const{id, nombre, imagen, types}= props; //Estoy haciendo un distroctoring al props
     return (
         <div className={style.cardPoke}>
             <Link className={style.namePoke} to={`/detail/${id}`}>
@@ -15,13 +15,13 @@ function Card(props) {
             <div className={style.ss}> 
                 <h2 className={style.typeText}>
                     {/* { tipo.map((types) => types.tipo + " ") } */}
-                    {tipo && tipo.map((type, index) => (
+                    {/* {tipo && tipo.map((type, index) => (
                         <span key={index} className={style.type}>
                             {type.tipo}
                             {index !== tipo.length - 1 && 
                             <span className={style.typeSeparator}>{" "}-{" "}</span>}
                         </span>
-                    ))}
+                    ))} */}
                     {types && types.map((type, index) => (
                         <span key={index} className={style.type}>
                             {type.name}

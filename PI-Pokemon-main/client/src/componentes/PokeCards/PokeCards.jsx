@@ -57,7 +57,7 @@ const PokeCards = ({ pokemons, fetchPokemons }) => {
                     return <Card key={poke.id}
                     id= {poke.id} 
                     nombre= {poke.nombre}
-                    tipo={poke.tipo} 
+                    tipo={poke.types} 
                     imagen= {poke.imagen}
                     types= {poke.types}
                     />
