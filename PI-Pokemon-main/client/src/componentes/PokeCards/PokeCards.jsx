@@ -7,8 +7,9 @@ import Pagination from '../Utils/Pagination/Paginacion'; // Importa el component
 
 
 
-const PokeCards = ({ pokemons, fetchPokemons }) => {
+const PokeCards = ({ pokemons, fetchPokemons, espacio }) => {
     const [currentPage, setCurrentPage] = useState(1);
+    const [filteredPokemons, setFilteredPokemons] = useState([]);
     const itemsPerPage = 12; // Número de elementos por página.
     
     
@@ -25,15 +26,20 @@ const PokeCards = ({ pokemons, fetchPokemons }) => {
         fetchData();
       }, [fetchPokemons]);
     
+      useEffect(() => {
+        setFilteredPokemons(pokemons);
+        setCurrentPage(1); // Restablecer la página a 1 al cambiar los Pokémon filtrados.
+    }, [pokemons]);
+
     
     // Función para obtener los elementos correspondientes a la página actual.
     const getCurrentItems = () => {
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-        return pokemons.slice(indexOfFirstItem, indexOfLastItem);
+        return filteredPokemons.slice(indexOfFirstItem, indexOfLastItem);
     };
     
-    const totalPages = Math.ceil(pokemons.length / itemsPerPage);
+    const totalPages = Math.ceil(filteredPokemons.length / itemsPerPage);
 
 
     // Función para cambiar a la siguiente página.
@@ -52,7 +58,7 @@ const PokeCards = ({ pokemons, fetchPokemons }) => {
  
     return (
         <>
-            <div className={style.cardFLex}>
+            <div className={!espacio ? style.cardFLex : style.cardFLexFilter}>
                 {getCurrentItems().map((poke) => {
                     return <Card key={poke.id}
                     id= {poke.id} 

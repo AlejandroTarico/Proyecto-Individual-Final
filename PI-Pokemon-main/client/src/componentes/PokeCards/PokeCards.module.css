@@ -4,3 +4,9 @@
     gap: 10px;
     padding-top: 75px;
 }
+.cardFLexFilter {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 10px;
+    padding-top: 130px;
+}

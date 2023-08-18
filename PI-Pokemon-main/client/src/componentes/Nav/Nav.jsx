@@ -17,11 +17,11 @@ const Nav = ({onSearch}) => {
         <>
             <div className={style.header}>
                 <nav> 
-                    <NavLink to='/home' onClick={handleHomeClick}>Inicio</NavLink>
+                    <NavLink to='/home' onClick={handleHomeClick} className={({ isActive }) => isActive ? style.active : ''}>Inicio</NavLink>
                     {location.pathname === '/home' && (
-                        <Link onClick={handleFilterClick}>Filtrar</Link>
+                        <Link className={style.btn_material} onClick={handleFilterClick}>Filtrar</Link>
                     )}
-                    <NavLink to='/formulario' >Formulario</NavLink>
+                    <NavLink to='/formulario' className={({ isActive }) => isActive ? style.active : ''}>Formulario</NavLink>
                 </nav>
                 <SearchBar></SearchBar>
             </div>

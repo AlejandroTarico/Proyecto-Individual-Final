@@ -30,7 +30,7 @@ function App() {
       {isFilterPage && isFilterBotton && <NavBotons/>}
       <Routes>
         <Route path="/" element={<Landing/>}/>
-        <Route path="/home" element={<PokeCards/>}/>
+        <Route path="/home" element={<PokeCards espacio={isFilterBotton}/>}/>
         <Route path="/detail/:id" element={<Detail/>} />
         <Route path="/formulario" element={<Form/>} />
       </Routes>

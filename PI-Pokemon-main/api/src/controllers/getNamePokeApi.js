@@ -5,6 +5,7 @@ const URL = "https://pokeapi.co/api/v2/pokemon/";
 
 
 const getPokemonNameApi = async (name) => {
+    console.log("SI LLEGA HASTA AQUI");
     try {
         const minoMayName = encodeURIComponent(name);
         const { data } = await axios(URL + minoMayName);
@@ -17,7 +18,7 @@ const getPokemonNameApi = async (name) => {
         const types = data.types.map((type) => {
             return { id: type.slot, name: type.type.name }
         })
-        const allPokemonesApi = {id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso, tipo};
+        const allPokemonesApi = {id, nombre, imagen, vida, ataque, defensa, velocidad, altura, peso, types};
         return ({...allPokemonesApi});
     } catch (error) {
         return "Error al obtener los datos de los Pokémons desde la Api";
